@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import { registerServiceWorker } from "@/utils/serviceWorker";
+import React, { useEffect } from "react";
 import { StreamChat } from "stream-chat";
 import {
   Channel,
@@ -25,6 +26,18 @@ const ChatPage = () => {
     },
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjIyMjIyIn0.H2x763wzn88J3_hwF0gX_PSfkmDHJCmSwuevVM5fxKc"
   );
+
+  useEffect(() => {
+    async function setUpServiceWorker() {
+      try {
+        await registerServiceWorker();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    setUpServiceWorker();
+  }, []);
 
   const channel = chatClient.channel("messaging", "channel_1", {
     name: "channel1 #1",
