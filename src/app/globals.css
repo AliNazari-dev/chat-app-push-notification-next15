@@ -2,20 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "~stream-chat-react/dist/css/v2/index.css";
+
+.str-chat {
+  --str-chat__primary-color: theme(colors.blue.500);
+  --str-chat__active-primary-color: theme(colors.blue.600);
+  --str-chat__disabled-color: theme(colors.gray.200);
+  --str-chat__cta-button-border-radius: theme(borderRadius.DEFAULT);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark .str-chat {
+  --str-chat__disabled-color: theme(colors.gray.600);
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.str-chat * {
+  font-family: inherit !important;
+}
+
+/* Search box height glitch fix */
+.str-chat__channel-search.str-chat__channel-search--with-results.str-chat__channel-search--inline {
+  height: fit-content;
 }

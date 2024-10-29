@@ -1,11 +1,50 @@
-import React from 'react'
+"use client";
+
+import React from "react";
+import { StreamChat } from "stream-chat";
+import {
+  Channel,
+  ChannelHeader,
+  Chat,
+  MessageInput,
+  MessageList,
+  Thread,
+  Window,
+} from "stream-chat-react";
 
 const ChatPage = () => {
+  const userId = "222222";
+  const chatClient = StreamChat.getInstance(
+    process.env.NEXT_PUBLIC_STREAM_KEY!
+  );
+
+  chatClient.connectUser(
+    {
+      id: userId,
+      name: "ali nazari",
+    },
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjIyMjIyIn0.H2x763wzn88J3_hwF0gX_PSfkmDHJCmSwuevVM5fxKc"
+  );
+
+  const channel = chatClient.channel("messaging", "channel_1", {
+    name: "channel1 #1",
+    members: [userId],
+  });
+
   return (
     <div>
-      This is a chat page
+      <Chat client={chatClient}>
+        <Channel channel={channel}>
+          <Window>
+            <ChannelHeader />
+            <MessageList />
+            <MessageInput />
+          </Window>
+          <Thread />
+        </Channel>
+      </Chat>
     </div>
-  )
-}
+  );
+};
 
-export default ChatPage
+export default ChatPage;

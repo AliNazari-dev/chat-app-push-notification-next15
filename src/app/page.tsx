@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { Notifications } from "react-push-notification";
 import Button from "./components/Button";
+import AddNotification from "./components/Notifications/AddNotification";
 
 export default function Home() {
   return (
@@ -9,6 +13,8 @@ export default function Home() {
       <Button as={Link} href="/chat">
         Start chatting
       </Button>
+      <Notifications />
+      <AddNotification />
     </div>
   );
 }
